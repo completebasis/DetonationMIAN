@@ -1,6 +1,10 @@
 {
   "siteTitle": "Исследование газовой детонации в отделе механики МИАН",
   "description": "Рабочие материалы по проекту",
+  "nav": {
+    "logo": "public/logo.jpeg",
+  },
+}
   "generateSidebar": false,
   "showSidebar": true,
   "sidebar": [
