@@ -1,0 +1,33 @@
+/* custom.css */
+
+/* Reduce page title size */
+h1 {
+  font-size: 1.8rem !important;    /* Adjust as needed */
+  font-weight: 600 !important;     /* Optional: slightly lighter than bold */
+  line-height: 1.3 !important;     /* Optional: tighter vertical spacing */
+  margin-bottom: 1rem;             /* Optional: add spacing below */
+}
+
+/* Optional: Tweak other heading levels */
+h2 {
+  font-size: 1.5rem !important;
+  font-weight: 500 !important;
+}
+
+h3 {
+  font-size: 1.3rem !important;
+}
+
+/* Optional: Change the font used across the site */
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Optional: Make links look cleaner */
+a {
+  text-decoration: none;
+  color: #007acc;
+}
+a:hover {
+  text-decoration: underline;
+}
