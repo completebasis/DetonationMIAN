@@ -4,7 +4,6 @@
   "nav": {
     "logo": "public/logo.svg",
   },
-}
   "generateSidebar": false,
   "showSidebar": true,
   "sidebar": [
