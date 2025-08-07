@@ -3,25 +3,29 @@
   "description": "Рабочие материалы по проекту",
   "nav": {
     "logo": "public/logo.svg",
-  },
-  "generateSidebar": false,
-  "showSidebar": true,
-  "sidebar": [
-    {
-      "label": "О проекте",
-      "href": "/README"
-    },
-    {
-      "label": "Доклады",
+    "links": [
+      {
+       "href": "/README",
+        "name": "О проекте"
+      },
+      {
+        "href": "/about",
+        "name": "About"
+      },
+      {
+      "name": "Доклады",
       "href": "/Доклады/Список докладов по теме"
     },
     {
-      "label": "Публикации",
+      "name": "Публикации",
       "href": "/Публикации/Список публикаций"
     },
     {
       "label": "Численные эксперименты",
       "href": "/Численные эксперименты"
     }
-  ]
+    ]
+  },
+  "generateSidebar": false,
+  "showSidebar": true,
 }
