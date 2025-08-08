@@ -31,3 +31,6 @@ a {
 a:hover {
   text-decoration: underline;
 }
+:has(> .cm-comment) {
+  display: none;
+}
