@@ -2,6 +2,8 @@
 -  [[_Index_of_DetonationMIAN|_Index_of_DetonationMIAN]]
 -  [[public/public|public]]
 -  [[README|README]]
+-  [[Scripts/Scripts|Scripts]]
+-  [[Templates/Templates|Templates]]
 -  [[Wiki/Wiki|Wiki]]
 -  [[Wiki|Wiki]]
 -  [[Доклады|Доклады]]
