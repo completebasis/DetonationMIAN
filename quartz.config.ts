@@ -8,7 +8,7 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "Quartz 4",
+    pageTitle: "Detonation@MI-RAS",
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
@@ -22,6 +22,7 @@ const config: QuartzConfig = {
     theme: {
       fontOrigin: "googleFonts",
       cdnCaching: true,
+      //css: ["custom.scss"],
       typography: {
         header: "Schibsted Grotesk",
         body: "Source Sans Pro",
@@ -51,6 +52,7 @@ const config: QuartzConfig = {
           textHighlight: "#b3aa0288",
         },
       },
+      
     },
   },
   plugins: {

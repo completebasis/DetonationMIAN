@@ -1,3 +1,16 @@
 @use "./base.scss";
 
 // put your custom CSS here!
+.site-header {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+    background-color: #000; /* fallback color */
+  }
+  
+  .header-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }

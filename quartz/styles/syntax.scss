@@ -15,3 +15,9 @@ code[data-theme*=" "] span {
 [saved-theme="dark"] code[data-theme*=" "] span {
   color: var(--shiki-dark);
 }
+
+/* Hide Quartz sidebar graph view */
+.graph-container,
+.graph-panel {
+  display: none !important;
+}

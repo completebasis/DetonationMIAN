@@ -41,9 +41,9 @@ const defaultOptions: Options = {
     }
 
     if (!a.isFolder && b.isFolder) {
-      return 1
-    } else {
       return -1
+    } else {
+      return 1
     }
   },
   filterFn: (node) => node.slugSegment !== "tags",
@@ -103,7 +103,7 @@ export default ((userOpts?: Partial<Options>) => {
           data-mobile={false}
           aria-expanded={true}
         >
-          <h2>{opts.title ?? i18n(cfg.locale).components.explorer.title}</h2>
+          <h2>{opts.title ?? "Содержание"}</h2>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="14"
