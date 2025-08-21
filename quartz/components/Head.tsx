@@ -5,6 +5,7 @@ import { googleFontHref, googleFontSubsetHref } from "../util/theme"
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import { unescapeHTML } from "../util/escape"
 import { CustomOgImagesEmitterName } from "../plugins/emitters/ogImage"
+
 export default (() => {
   const Head: QuartzComponent = ({
     cfg,
@@ -27,7 +28,6 @@ export default (() => {
     const baseDir = fileData.slug === "404" ? path : pathToRoot(fileData.slug!)
     const iconPath = joinSegments(baseDir, "static/icon.png")
 
-    // Url of current page
     const socialUrl =
       fileData.slug === "404" ? url.toString() : joinSegments(url.toString(), fileData.slug!)
 
@@ -97,6 +97,41 @@ export default (() => {
             return resource
           }
         })}
+
+        {/* Google Translate init script */}
+        <script
+  dangerouslySetInnerHTML={{
+    __html: `
+      function googleTranslateElementInit() {
+        if (!document.querySelector('.goog-te-combo')) {
+          new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,fr,de,ru,vi,hi',
+            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+          }, 'google_translate_element');
+        }
+      }
+
+      function loadGoogleTranslate() {
+        if (!window.google || !window.google.translate) {
+          var s = document.createElement('script');
+          s.type = 'text/javascript';
+          s.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+          document.head.appendChild(s);
+        } else {
+          googleTranslateElementInit();
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', loadGoogleTranslate);
+
+      // Quartz SPA navigation event
+      document.addEventListener('nav', function() {
+        setTimeout(googleTranslateElementInit, 100);
+      });
+    `,
+  }}
+/>
       </head>
     )
   }

@@ -1,4 +1,4 @@
-import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
+import { QuartzComponent, QuartzComponentConstructor } from "./types"
 
 const Header: QuartzComponent = () => {
   return (
@@ -16,10 +16,8 @@ header {
   margin: 2rem 0;
   gap: 1.5rem;
 }
-
-header h1 {
-  margin: 0;
-  flex: auto;
+.header-img {
+  height: 80px;
 }
 `
 
