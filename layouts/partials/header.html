@@ -1,0 +1,59 @@
+<header class="site-header">
+    <nav style="display:flex; flex-direction:column; gap:10px;">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+            <a class="site-title" href="/news/news/">{{ .Site.Title }}</a>
+
+            <div id="translate-widget" style="position:relative;">
+                <div id="translate-floating"
+                     style="
+                       background: #3b82f6;
+                       color: white;
+                       width: 25px;
+                       height: 25px;
+                       border-radius: 50%;
+                       display: flex;
+                       justify-content: center;
+                       align-items: center;
+                       cursor: pointer;
+                       font-size: 16px;
+                       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                     ">
+                    🌐
+                </div>
+
+                <div id="google_translate_container"
+                     style="
+                       display: none;
+                       position: absolute;
+                       top: 100%;
+                       right: 0;
+                       margin-top: 10px;
+                       background: white;
+                       padding: 10px;
+                       border-radius: 8px;
+                       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                       z-index: 9999;
+                     ">
+                    <div id="google_translate_element"></div>
+                </div>
+            </div>
+        </div>
+
+        <ul style="display:flex; gap:15px; margin:0; padding:0;">
+            {{ $menu := slice
+                (dict "name" "Новости"  "url" "/news/news/" )
+                (dict "name" "Публикации"  "url" "/publications/publications/" )
+                (dict "name" "Доклады и Лекции"  "url" "/talks/talks/" )
+                (dict "name" "Заметки"    "url" "/blog/" )
+                (dict "name" "О проекте"    "url" "/about/about/" "pushRight" true )
+                (dict "name" "История исследований газовой детонации в Москве"    "url" "/history/history/" )
+            }}
+
+            {{ range $menu }}
+                <li class="nav-item{{ if or (eq $.RelPermalink .url) (and $.IsHome (eq .url "/news/news/")) }} active{{ end }}{{ if .pushRight }} nav-push-right{{ end }}" style="list-style:none;">
+                    <a href="{{ .url }}">{{ .name }}</a>
+                </li>
+            {{ end }}
+        </ul>
+    </nav>
+</header>

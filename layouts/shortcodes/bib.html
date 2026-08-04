@@ -1,0 +1,54 @@
+{{ $id := .Get 0 }}
+{{ $allBib := .Page.Params.bibliography }}
+
+{{/* Sort bibliography by year (newest first) */}}
+{{ $sortedBib := sort $allBib "year" "desc" }}
+
+{{/* Find the entry and its position in sorted list */}}
+{{ $position := 0 }}
+{{ $entry := dict }}
+{{ range $index, $item := $sortedBib }}
+  {{ if eq $item.id $id }}
+    {{ $position = add $index 1 }}
+    {{ $entry = $item }}
+  {{ end }}
+{{ end }}
+
+{{ with $entry }}
+<div class="publication" style="margin-bottom: 1.5em; padding-bottom: 1em; border-bottom: 1px solid #eee;">
+  <div style="display: flex; align-items: flex-start;">
+    <div style="min-width: 2em; font-weight: bold; color: #0066cc; margin-right: 0.5em;">
+      {{ $position }}.
+    </div>
+    <div style="flex: 1;">
+      <div style="font-weight: bold; margin-bottom: 0.3em;">
+        {{ .author }}.
+      </div>
+      <div style="font-style: italic; margin-bottom: 0.3em;">
+        "{{ .title }}".
+      </div>
+      <div style="color: #555; font-size: 0.95em; line-height: 1.4;">
+        {{ if .journal }}
+          <em>{{ .journal }}</em>
+          {{ if .volume }}<strong>{{ .volume }}</strong>{{ end }}
+          {{ if .pages }}({{ .pages }}){{ end }}.
+        {{ end }}
+        {{ if .publisher }}
+          {{ .publisher }},
+        {{ end }}
+        <strong>{{ .year }}</strong>.
+        {{ if .doi }}
+          <a href="{{ .doi }}" target="_blank" 
+             style="color: #0066cc; text-decoration: none; border-bottom: 1px solid #6cb6ff;">
+            doi:{{ strings.TrimPrefix "https://doi.org/" .doi }}
+          </a>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
+{{ else }}
+<div style="color: #dc2626; background: #fef2f2; padding: 10px; border-radius: 4px;">
+  Reference "{{ $id }}" not found.
+</div>
+{{ end }}

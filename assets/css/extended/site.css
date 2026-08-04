@@ -1,0 +1,70 @@
+/* Base text size */
+body {
+    font-size: 12px;
+}
+
+/* Wide content column, consistent across all page templates (including the homepage) */
+:root {
+    --main-width: min(90vw, 1400px);
+    --nav-width: min(90vw, 1400px);
+}
+
+.main {
+    max-width: var(--main-width);
+    width: 100%;
+    padding-left: 2%;
+    padding-right: 10%;
+    margin: 0 auto;
+}
+
+/* Left-align all content */
+body,
+.main,
+.article-content {
+    text-align: left;
+}
+
+/* Header background image */
+header.site-header {
+    --header-padding-left: 20px;
+    --header-padding-right: 20px;
+    background-image: url("/images/header.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px var(--header-padding-right) 20px var(--header-padding-left);
+}
+
+header.site-header nav a {
+    color: #fff;
+}
+
+header.site-header .site-title {
+    font-size: 16px;
+}
+
+header.site-header nav ul {
+    flex: 1;
+}
+
+header.site-header .nav-item {
+    font-size: 14px;
+}
+
+header.site-header .nav-item.nav-push-right {
+    margin-left: auto;
+}
+
+/* Highlight the currently loaded content page in the nav */
+header.site-header .nav-item.active > a {
+    color: #e5484d;
+    font-weight: 700;
+}
+
+/* Google Translate widget hider */
+.goog-te-banner-frame {
+    display: none !important;
+}
+body {
+    top: 0 !important;
+}

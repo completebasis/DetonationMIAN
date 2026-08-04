@@ -1,0 +1,51 @@
+# Keep your existing config and add these:
+
+theme: PaperMod #ananke
+title: "Исследование ячеистой структуры детонационной волны"
+
+params:
+    mainSections:
+        - about
+    assets:
+      disableFingerprinting: true  # Makes debugging easier
+      disableHLJS: false
+
+    # PaperMod-specific markdown settings
+    displayFullLangName: false
+    ShowReadingTime: true
+    ShowShareButtons: false
+    ShowCodeCopyButtons: true
+
+pagination:
+  pagerSize: 5
+
+markup:
+  # Enable GitHub-style markdown
+  defaultMarkdownHandler: goldmark
+
+  goldmark:
+    extensions:
+      hardLineBreak: true 
+      definitionList: true
+      footnote: true
+      linkify: true
+      linkifyProtocol: "https"
+      strikethrough: true
+      table: true
+      taskList: true
+      typographer: true
+
+    renderer:
+      unsafe: true 
+      hardWraps: true
+    
+    parser:
+      attribute: true
+      autoHeadingID: true
+      autoHeadingIDType: "github"
+
+  # Enable table of contents
+  tableOfContents:
+    endLevel: 6
+    ordered: false
+    startLevel: 2

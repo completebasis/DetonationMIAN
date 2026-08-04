@@ -1,0 +1,61 @@
+{{ define "main" }}
+<!-- Add CSS for list pages -->
+<style>
+/* Fix ALL links on list pages */
+.article-content a,
+main a:not(.nav-link):not([class*="button"]) {
+    /*text-decoration: underline !important;*/
+    color: #0066cc !important;
+    border-bottom: 1px solid #6cb6ff !important;
+    padding-bottom: 2px !important;
+    transition: border-bottom-width 0.15s ease, border-bottom-color 0.15s ease !important;
+}
+
+.article-content a:hover,
+main a:not(.nav-link):not([class*="button"]):hover {
+    border-bottom-width: 2px !important;
+    border-bottom-color: #1f6feb !important;
+    color: #1f6feb !important;
+}
+
+/* Add this to your existing <style> block */
+
+.article-content {
+    text-align: left !important;
+}
+
+/* Keep headings left-aligned */
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4 {
+    text-align: left !important;
+}
+
+/* Better readability */
+.article-content p {
+    line-height: 1.6;
+    margin-bottom: 1.2em;
+}
+
+</style>
+
+<main class="main">
+    <article class="article-content">
+
+        <!-- REMOVE SECTION TITLE: do NOT show .Title -->
+        {{/* Previously PaperMod printed the section name here. We omit it. */}}
+
+        <!-- Show page content instead -->
+        {{ .Content | safeHTML }}
+
+        <!-- Show pages inside this section -->
+        {{ range .Pages }}
+            <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+            {{ .Summary }}
+        {{ end }}
+
+    </article>
+</main>
+
+{{ end }}

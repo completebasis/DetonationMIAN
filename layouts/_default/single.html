@@ -1,0 +1,136 @@
+{{ define "main" }}
+<!-- Add CSS for single pages -->
+<style>
+/* Fix ALL links on single pages */
+.article-content a,
+main a:not(.nav-link):not([class*="button"]) {
+    /*text-decoration: underline !important;*/
+    color: #0066cc !important;
+    border-bottom: 1px solid #6cb6ff !important;
+    padding-bottom: 2px !important;
+    transition: border-bottom-width 0.15s ease, border-bottom-color 0.15s ease !important;
+}
+
+.article-content a:hover,
+main a:not(.nav-link):not([class*="button"]):hover {
+    border-bottom-width: 2px !important;
+    border-bottom-color: #1f6feb !important;
+    color: #1f6feb !important;
+}
+/* Add this to your existing <style> block */
+
+.article-content {
+    text-align: justify !important;
+}
+
+/* Keep headings left-aligned */
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4 {
+    text-align: left !important;
+}
+
+/* Better readability */
+.article-content p {
+    line-height: 1.6;
+    margin-bottom: 1.2em;
+}
+
+/* Space between title and page content */
+.page-header {
+    padding-bottom: 10px;
+}
+
+/* Layout: article content + sticky table of contents */
+.single-layout {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.single-layout .article-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.toc-sidebar {
+    flex-shrink: 0;
+    width: 240px;
+    position: sticky;
+    top: 20px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    font-size: 0.9em;
+    border-left: 1px solid #e5e5e5;
+    padding-left: 20px;
+}
+
+.toc-sidebar .toc-title {
+    font-weight: 700;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+    font-size: 0.85em;
+    color: #6b7280;
+}
+
+.toc-sidebar nav#TableOfContents ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0.8em;
+    border-left: 1px solid #e5e5e5;
+}
+
+.toc-sidebar nav#TableOfContents > ul {
+    padding-left: 0;
+    border-left: none;
+}
+
+.toc-sidebar nav#TableOfContents li {
+    margin: 0.35em 0;
+}
+
+.toc-sidebar nav#TableOfContents a {
+    color: #374151 !important;
+    border-bottom: none !important;
+    line-height: 1.4;
+}
+
+.toc-sidebar nav#TableOfContents a:hover {
+    color: #1f6feb !important;
+}
+
+@media (max-width: 900px) {
+    .single-layout {
+        flex-direction: column;
+    }
+
+    .toc-sidebar {
+        width: 100%;
+        position: static;
+        max-height: none;
+        border-left: none;
+        border-top: 1px solid #e5e5e5;
+        padding-left: 0;
+        padding-top: 20px;
+    }
+}
+</style>
+
+<!-- Use PaperMod's structure -->
+<header class="page-header">
+    <h1>{{ .Title }}</h1>
+</header>
+
+<div class="single-layout">
+    <div class="article-content">
+        {{ .Content }}
+    </div>
+    {{ if findRE "<li>" .TableOfContents 1 }}
+    <aside class="toc-sidebar">
+        <div class="toc-title">Содержание</div>
+        {{ .TableOfContents }}
+    </aside>
+    {{ end }}
+</div>
+{{ end }}

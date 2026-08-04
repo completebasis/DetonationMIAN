@@ -1,0 +1,83 @@
+{{ define "main" }}
+<style>
+.article-content a,
+main a:not(.nav-link):not([class*="button"]) {
+    color: #0066cc !important;
+    border-bottom: 1px solid #6cb6ff !important;
+    padding-bottom: 2px !important;
+    transition: border-bottom-width 0.15s ease, border-bottom-color 0.15s ease !important;
+}
+
+.article-content a:hover,
+main a:not(.nav-link):not([class*="button"]):hover {
+    border-bottom-width: 2px !important;
+    border-bottom-color: #1f6feb !important;
+    color: #1f6feb !important;
+}
+
+.article-content {
+    text-align: left !important;
+}
+
+.article-content h1,
+.article-content h2,
+.article-content h3,
+.article-content h4 {
+    text-align: left !important;
+}
+
+.page-header {
+    padding-bottom: 10px;
+}
+
+.blog-post-entry {
+    padding-bottom: 1.5em;
+    margin-bottom: 1.5em;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.blog-post-entry:last-child {
+    border-bottom: none;
+}
+
+.blog-post-entry .blog-post-date {
+    color: #6b7280;
+    font-size: 0.9em;
+}
+
+.blog-post-entry .blog-post-title {
+    margin: 0.2em 0 0.4em 0;
+}
+
+.blog-post-entry .blog-post-summary p {
+    line-height: 1.6;
+    margin-bottom: 0.6em;
+}
+</style>
+
+<header class="page-header">
+    <h1>{{ .Title }}</h1>
+</header>
+
+<div class="article-content">
+    {{ .Content }}
+
+    {{ $pages := .Pages.ByDate.Reverse }}
+    {{ $paginator := .Paginate $pages }}
+
+    {{ range $paginator.Pages }}
+        <article class="blog-post-entry">
+            <div class="blog-post-date">{{ .Date.Format "02.01.2006" }}</div>
+            <h2 class="blog-post-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+            <div class="blog-post-summary">
+                {{ .Summary }}
+            </div>
+            {{ if .Truncated }}
+                <a href="{{ .RelPermalink }}">Читать полностью &rarr;</a>
+            {{ end }}
+        </article>
+    {{ end }}
+
+    {{ template "_internal/pagination.html" . }}
+</div>
+{{ end }}

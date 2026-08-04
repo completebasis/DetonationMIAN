@@ -1,0 +1,28 @@
+{{ $src := .Get "src" }}
+{{ $alt := .Get "alt" | default "" }}
+{{ $width := .Get "width" | default "1200" }}
+{{ $class := .Get "class" | default "" }}
+
+{{ $image := .Page.Resources.GetMatch $src }}
+
+{{ if not $image }}
+  <p style="color:red;">⚠️ Image not found: {{ $src }}</p>
+{{ else }}
+  {{ $targetWidth := int $width }}
+  {{ if gt $image.Width $targetWidth }}
+    {{ $resized := $image.Resize (printf "%dx" $targetWidth) }}
+    <img src="{{ $resized.RelPermalink }}"
+         width="{{ $resized.Width }}"
+         height="{{ $resized.Height }}"
+         alt="{{ $alt }}"
+         {{ with $class }}class="{{ . }}"{{ end }}
+         loading="lazy">
+  {{ else }}
+    <img src="{{ $image.RelPermalink }}"
+         width="{{ $image.Width }}"
+         height="{{ $image.Height }}"
+         alt="{{ $alt }}"
+         {{ with $class }}class="{{ . }}"{{ end }}
+         loading="lazy">
+  {{ end }}
+{{ end }}
