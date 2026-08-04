@@ -50,7 +50,7 @@
             }}
 
             {{ range $menu }}
-                <li class="nav-item{{ if or (eq $.RelPermalink (.url | absURL)) (and $.IsHome (eq .url "news/")) }} active{{ end }}{{ if .pushRight }} nav-push-right{{ end }}" style="list-style:none;">
+                <li class="nav-item{{ if or (eq $.RelPermalink (.url | relURL)) (and $.IsHome (eq .url "news/")) }} active{{ end }}{{ if .pushRight }} nav-push-right{{ end }}" style="list-style:none;">
                     <a href="{{ .url | absURL }}">{{ .name }}</a>
                 </li>
             {{ end }}
