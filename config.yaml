@@ -1,3 +1,4 @@
+baseURL: "https://completebasis.github.io/DetonationMIAN/"
 # Keep your existing config and add these:
 
 theme: PaperMod #ananke
