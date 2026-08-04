@@ -1,7 +1,7 @@
 <header class="site-header">
     <nav style="display:flex; flex-direction:column; gap:10px;">
         <div style="display:flex; align-items:center; justify-content:space-between;">
-            <a class="site-title" href="/news/news/">{{ .Site.Title }}</a>
+            <a class="site-title" href="/news/">{{ .Site.Title }}</a>
 
             <div id="translate-widget" style="position:relative;">
                 <div id="translate-floating"
@@ -41,16 +41,16 @@
 
         <ul style="display:flex; gap:15px; margin:0; padding:0;">
             {{ $menu := slice
-                (dict "name" "Новости"  "url" "/news/news/" )
-                (dict "name" "Публикации"  "url" "/publications/publications/" )
-                (dict "name" "Доклады и Лекции"  "url" "/talks/talks/" )
+                (dict "name" "Новости"  "url" "/news/" )
+                (dict "name" "Публикации"  "url" "/publications/" )
+                (dict "name" "Доклады и Лекции"  "url" "/talks/" )
                 (dict "name" "Заметки"    "url" "/blog/" )
-                (dict "name" "О проекте"    "url" "/about/about/" "pushRight" true )
-                (dict "name" "История исследований газовой детонации в Москве"    "url" "/history/history/" )
+                (dict "name" "О проекте"    "url" "/about/" "pushRight" true )
+                (dict "name" "История исследований газовой детонации в Москве"    "url" "/history/" )
             }}
 
             {{ range $menu }}
-                <li class="nav-item{{ if or (eq $.RelPermalink .url) (and $.IsHome (eq .url "/news/news/")) }} active{{ end }}{{ if .pushRight }} nav-push-right{{ end }}" style="list-style:none;">
+                <li class="nav-item{{ if or (eq $.RelPermalink .url) (and $.IsHome (eq .url "/news/")) }} active{{ end }}{{ if .pushRight }} nav-push-right{{ end }}" style="list-style:none;">
                     <a href="{{ .url }}">{{ .name }}</a>
                 </li>
             {{ end }}
