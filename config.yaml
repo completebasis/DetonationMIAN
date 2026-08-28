@@ -1,8 +1,8 @@
-baseURL: "https://completebasis.github.io/DetonationMIAN/"
+baseURL: "https://completebasis.github.io/reactingflows/"
 # Keep your existing config and add these:
 
 theme: PaperMod #ananke
-title: "Исследование ячеистой структуры детонационной волны"
+title: "Исследование реагирующих газовых потоков"
 
 params:
     mainSections:

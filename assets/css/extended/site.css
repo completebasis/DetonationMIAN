@@ -28,7 +28,7 @@ body,
 header.site-header {
     --header-padding-left: 20px;
     --header-padding-right: 20px;
-    background-image: url("/DetonationMIAN/images/header.png");
+    background-image: url("../../images/header.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -59,6 +59,52 @@ header.site-header .nav-item.nav-push-right {
 header.site-header .nav-item.active > a {
     color: #e5484d;
     font-weight: 700;
+}
+
+/* Dropdown submenu (e.g. Проекты) */
+header.site-header .nav-item.has-dropdown {
+    position: relative;
+}
+
+header.site-header .nav-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin: 0;
+    padding: 8px 0 6px;
+    min-width: 200px;
+    background: #1f2937;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 20;
+    list-style: none;
+}
+
+header.site-header .nav-item.has-dropdown:hover .nav-dropdown,
+header.site-header .nav-item.has-dropdown:focus-within .nav-dropdown {
+    display: block;
+}
+
+header.site-header .nav-dropdown li {
+    list-style: none;
+}
+
+header.site-header .nav-dropdown a {
+    display: block;
+    padding: 8px 16px;
+    white-space: nowrap;
+    font-size: 13px;
+}
+
+header.site-header .nav-dropdown a:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+/* Right-aligned nav item's dropdown should not overflow the viewport */
+header.site-header .nav-item.nav-push-right .nav-dropdown {
+    left: auto;
+    right: 0;
 }
 
 /* Google Translate widget hider */

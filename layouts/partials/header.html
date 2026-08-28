@@ -45,13 +45,39 @@
                 (dict "name" "Публикации"  "url" "publications/" )
                 (dict "name" "Доклады и Лекции"  "url" "talks/" )
                 (dict "name" "Заметки"    "url" "blog/" )
-                (dict "name" "О проекте"    "url" "about/" "pushRight" true )
+                (dict "name" "Проекты"    "url" "projects/" "dropdownSection" "projects" )
+                (dict "name" "О нас"    "url" "about/" "pushRight" true )
                 (dict "name" "История исследований газовой детонации в Москве"    "url" "history/" )
             }}
 
             {{ range $menu }}
-                <li class="nav-item{{ if or (eq $.RelPermalink (.url | relURL)) (and $.IsHome (eq .url "news/")) }} active{{ end }}{{ if .pushRight }} nav-push-right{{ end }}" style="list-style:none;">
-                    <a href="{{ .url | absURL }}">{{ .name }}</a>
+                {{ $section := .dropdownSection }}
+                {{ $subPages := slice }}
+                {{ $sectionPage := "" }}
+                {{ if $section }}
+                    {{ with $.Site.GetPage $section }}
+                        {{ $subPages = .Pages }}
+                        {{ $sectionPage = . }}
+                    {{ end }}
+                {{ end }}
+
+                {{ $activeChildTitle := "" }}
+                {{ if $sectionPage }}
+                    {{ $currentSection := $.CurrentSection }}
+                    {{ if and $currentSection (eq $currentSection.Section $section) (ne $currentSection.RelPermalink $sectionPage.RelPermalink) }}
+                        {{ $activeChildTitle = $currentSection.Title }}
+                    {{ end }}
+                {{ end }}
+
+                <li class="nav-item{{ if gt (len $subPages) 0 }} has-dropdown{{ end }}{{ if or (eq $.RelPermalink (.url | relURL)) (and $.IsHome (eq .url "news/")) $activeChildTitle }} active{{ end }}{{ if .pushRight }} nav-push-right{{ end }}" style="list-style:none;">
+                    <a href="{{ .url | absURL }}">{{ .name }}{{ if $activeChildTitle }} - {{ $activeChildTitle }}{{ end }}</a>
+                    {{ if gt (len $subPages) 0 }}
+                        <ul class="nav-dropdown">
+                            {{ range $subPages.ByTitle }}
+                                <li><a href="{{ .RelPermalink | absURL }}">{{ .Title }}</a></li>
+                            {{ end }}
+                        </ul>
+                    {{ end }}
                 </li>
             {{ end }}
         </ul>

@@ -44,6 +44,33 @@ jobs:
           hugo \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
+      - name: Password-protect project pages
+        env:
+          STATICRYPT_PW_TEA: ${{ secrets.STATICRYPT_PW_TEA }}
+          STATICRYPT_PW_TRANSPORTEFFECTS: ${{ secrets.STATICRYPT_PW_TRANSPORTEFFECTS }}
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          for dir in public/projects/*/; do
+            name="$(basename "$dir")"
+            var_name="STATICRYPT_PW_$(echo "$name" | tr '[:lower:]' '[:upper:]')"
+            pw="${!var_name:-}"
+            if [ -z "$pw" ]; then
+              echo "::error::No password secret set for project '$name' (expected secret $var_name, mapped in this step's env block)"
+              exit 1
+            fi
+            rm -rf /tmp/staticrypt_out
+            npx --yes staticrypt@3.5.4 "$dir" -r -p "$pw" -d /tmp/staticrypt_out --short \
+              --template-title "Защищённая страница" \
+              --template-instructions "Введите пароль для доступа к странице проекта" \
+              --template-button "Войти" \
+              --template-placeholder "Пароль" \
+              --template-error "Неверный пароль"
+            rm -rf "$dir"
+            mv "/tmp/staticrypt_out/$name" "$dir"
+            echo "Encrypted $dir"
+          done
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
